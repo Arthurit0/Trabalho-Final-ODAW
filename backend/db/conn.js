@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/getapetref')
+  await mongoose.connect('mongodb://localhost:27017/adotapets')
   console.log('Conectou com Mongoose!')
 }
 
