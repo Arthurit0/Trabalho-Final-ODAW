@@ -1,2 +1,4 @@
-backend/node_modules/
-frontend/node_modules/
+base/backend/node_modules/
+base/frontend/node_modules/
+Trabalho/backend/node_modules/
+Trabalho/frontend/node_modules/
