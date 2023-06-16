@@ -3,15 +3,15 @@ const cors = require('cors')
 
 const app = express()
 
-app.use(express)
-
-app.use(cors({ credentials: true, origin: 'http://localhost:9000' }))
-
+// Receber resposta em JSON
+app.use(express.json())
+// Configurar CORS
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+// Pasta de dados publicos
 app.use(express.static('public'))
 
 const UserRoutes = require('./routes/UserRoutes')
 
 app.use('/users', UserRoutes)
-
 
 app.listen(5000)
