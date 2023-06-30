@@ -1,2 +1,0 @@
-# Projeto Final ODAW
- Vambora

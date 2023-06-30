@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Confortaa';
+    src: local('Confortaa'), url('./fonts/Comfortaa.ttf') format('truetype');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Confortaa', serif;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #222222;
+    margin-bottom: 1em;
+    font-size: 2.1em;
+}
+
+.bold {
+    font-weight: bold;
+    color: #222222;
+}
