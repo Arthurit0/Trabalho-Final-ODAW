@@ -147,13 +147,7 @@ module.exports = class UserController {
   static async editUser(req, res) {
     const token = getToken(req)
 
-    //console.log(token);
-
     const user = await getUserByToken(token)
-
-    // console.log(user);
-    // console.log(req.body)
-    // console.log(req.file.filename)
 
     const name = req.body.name
     const email = req.body.email
@@ -167,7 +161,6 @@ module.exports = class UserController {
       image = req.file.filename
     }
 
-    // validations
     if (!name) {
       res.status(422).json({ message: 'O nome é obrigatório!' })
       return
@@ -228,6 +221,8 @@ module.exports = class UserController {
         message: 'Usuário atualizado com sucesso!',
         data: updatedUser,
       })
+
+      console.log(updatedUser)
     } catch (error) {
       res.status(500).json({ message: error })
     }

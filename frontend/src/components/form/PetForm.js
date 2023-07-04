@@ -8,7 +8,9 @@ import Select from './Select'
 function PetForm({ handleSubmit, petData, btnText }) {
   const [pet, setPet] = useState(petData || {})
   const [preview, setPreview] = useState([])
-  const colors = ['Branco', 'Preto', 'Cinza', 'Caramelo']
+  const species = { 'Cachorro': ['Labrador', 'Pastor Alemão', 'Pinstcher', 'Não especificado'], 'Gato': ['Siamês', 'Persa', 'Angorá', 'Não especificado'], 'Roedor': ['Hamster', 'Twister', 'Porquinho-da-Índia', 'Não especificado'], 'Pássaro': ['Papagaio', 'Canário', 'Cacatua', 'Não especificado'] }
+
+  // const colors = ['Branco', 'Preto', 'Cinza', 'Caramelo']
 
   function onFileChange(e) {
     console.log(Array.from(e.target.files))
@@ -20,10 +22,17 @@ function PetForm({ handleSubmit, petData, btnText }) {
     setPet({ ...pet, [e.target.name]: e.target.value })
   }
 
-  function handleColor(e) {
+  // function handleColor(e) {
+  //   setPet({
+  //     ...pet,
+  //     color: e.target.options[e.target.selectedIndex].text,
+  //   })
+  // }
+
+  function handleSpecies(e) {
     setPet({
       ...pet,
-      color: e.target.options[e.target.selectedIndex].text,
+      species: e.target.options[e.target.selectedIndex].text,
     })
   }
 
@@ -37,20 +46,20 @@ function PetForm({ handleSubmit, petData, btnText }) {
       <div className={formStyles.preview_pet_images}>
         {preview.length > 0
           ? preview.map((image, index) => (
-              <img
-                src={URL.createObjectURL(image)}
-                alt={pet.name}
-                key={`${pet.name}+${index}`}
-              />
-            ))
+            <img
+              src={URL.createObjectURL(image)}
+              alt={pet.name}
+              key={`${pet.name}+${index}`}
+            />
+          ))
           : pet.images &&
-            pet.images.map((image, index) => (
-              <img
-                src={`${process.env.REACT_APP_API}/images/pets/${image}`}
-                alt={pet.name}
-                key={`${pet.name}+${index}`}
-              />
-            ))}
+          pet.images.map((image, index) => (
+            <img
+              src={`${process.env.REACT_APP_API}/images/pets/${image}`}
+              alt={pet.name}
+              key={`${pet.name}+${index}`}
+            />
+          ))}
       </div>
       <Input
         text="Imagens do Pet"
@@ -84,12 +93,22 @@ function PetForm({ handleSubmit, petData, btnText }) {
         handleOnChange={handleChange}
       />
       <Select
+        name="especie"
+        text="Selecione a espécie"
+        options={Object.keys(species)}
+        handleOnChange={handleSpecies}
+        value={pet.species || ''}
+      />
+
+      {/* <Select
         name="color"
         text="Selecione a categoria"
         options={colors}
         handleOnChange={handleColor}
         value={pet.color || ''}
-      />
+      /> */}
+
+
       <input type="submit" value={btnText} />
     </form>
   )

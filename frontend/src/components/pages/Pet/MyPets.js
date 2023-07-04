@@ -42,8 +42,8 @@ function MyPets() {
         return response.data
       })
       .catch((err) => {
-        console.log(err)
         msgType = 'error'
+        console.log(err)
         return err.response.data
       })
 
@@ -60,11 +60,12 @@ function MyPets() {
         },
       })
       .then((response) => {
+        console.log(response)
         return response.data
       })
       .catch((err) => {
-        console.log(err)
         msgType = 'error'
+        console.log(err)
         return err.response.data
       })
 

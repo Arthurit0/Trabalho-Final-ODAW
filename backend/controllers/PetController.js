@@ -1,26 +1,22 @@
 const Pet = require('../models/Pet')
 
-// helpers
+// Helpers
 const getUserByToken = require('../helpers/get-user-by-token')
 const getToken = require('../helpers/get-token')
 const ObjectId = require('mongoose').Types.ObjectId
 
 module.exports = class PetController {
-  // create a pet
+  // Cria Pet
   static async create(req, res) {
     const name = req.body.name
     const age = req.body.age
     const description = req.body.description
     const weight = req.body.weight
-    const color = req.body.color
+    const species = req.body.species
     const images = req.files
     const available = true
 
-    // console.log(req.body)
-    console.log(images)
-    // return
-
-    // validations
+    // Validações
     if (!name) {
       res.status(422).json({ message: 'O nome é obrigatório!' })
       return
@@ -36,8 +32,8 @@ module.exports = class PetController {
       return
     }
 
-    if (!color) {
-      res.status(422).json({ message: 'A cor é obrigatória!' })
+    if (!species) {
+      res.status(422).json({ message: 'A espécie é obrigatória!' })
       return
     }
 
@@ -56,9 +52,10 @@ module.exports = class PetController {
       age: age,
       description: description,
       weight: weight,
-      color: color,
+      species: species,
       available: available,
       images: [],
+
       user: {
         _id: user._id,
         name: user.name,
@@ -83,7 +80,7 @@ module.exports = class PetController {
     }
   }
 
-  // get all registered pets
+  // Puxar todos os Pets registrados
   static async getAll(req, res) {
     const pets = await Pet.find().sort('-createdAt')
 
@@ -92,7 +89,7 @@ module.exports = class PetController {
     })
   }
 
-  // get all user pets
+  // Puxar todos os pets do usuário
   static async getAllUserPets(req, res) {
     // get user
     const token = getToken(req)
@@ -105,7 +102,7 @@ module.exports = class PetController {
     })
   }
 
-  // get all user adoptions
+  // Puxar todas as adoções do usuário
   static async getAllUserAdoptions(req, res) {
     // get user
     const token = getToken(req)
@@ -118,17 +115,17 @@ module.exports = class PetController {
     })
   }
 
-  // get a specific pet
+  // Puxar um pet específico pelo Id
   static async getPetById(req, res) {
     const id = req.params.id
 
-    // check if id is valid
+    // Checa se id é válido
     if (!ObjectId.isValid(id)) {
       res.status(422).json({ message: 'ID inválido!' })
       return
     }
 
-    // check if pet exists
+    // Puxa o pet se existir
     const pet = await Pet.findOne({ _id: id })
 
     if (!pet) {
@@ -141,17 +138,17 @@ module.exports = class PetController {
     })
   }
 
-  // remove a pet
+  // Remover um pet com seu ID
   static async removePetById(req, res) {
     const id = req.params.id
 
-    // check if id is valid
+    // Checa ID
     if (!ObjectId.isValid(id)) {
       res.status(422).json({ message: 'ID inválido!' })
       return
     }
 
-    // check if pet exists
+    // Checa Pet
     const pet = await Pet.findOne({ _id: id })
 
     if (!pet) {
@@ -159,7 +156,7 @@ module.exports = class PetController {
       return
     }
 
-    // check if user registered this pet
+    // Checar se foi o usuário que pediu para apagar que registrou
     const token = getToken(req)
     const user = await getUserByToken(token)
 
@@ -176,20 +173,20 @@ module.exports = class PetController {
     res.status(200).json({ message: 'Pet removido com sucesso!' })
   }
 
-  // update a pet
+  // Atualizar Pet
   static async updatePet(req, res) {
     const id = req.params.id
     const name = req.body.name
     const age = req.body.age
     const description = req.body.description
     const weight = req.body.weight
-    const color = req.body.color
+    const species = req.body.species
     const images = req.files
     const available = req.body.available
 
     const updateData = {}
 
-    // check if pet exists
+    // Checa se o pet existe
     const pet = await Pet.findOne({ _id: id })
 
     if (!pet) {
@@ -197,7 +194,6 @@ module.exports = class PetController {
       return
     }
 
-    // check if user registered this pet
     const token = getToken(req)
     const user = await getUserByToken(token)
 
@@ -209,7 +205,6 @@ module.exports = class PetController {
       return
     }
 
-    // validations
     if (!name) {
       res.status(422).json({ message: 'O nome é obrigatório!' })
       return
@@ -231,11 +226,11 @@ module.exports = class PetController {
       updateData.weight = weight
     }
 
-    if (!color) {
-      res.status(422).json({ message: 'A cor é obrigatória!' })
+    if (!species) {
+      res.status(422).json({ message: 'A espécie é obrigatória!' })
       return
     } else {
-      updateData.color = color
+      updateData.species = species
     }
 
     if (!images) {
@@ -259,21 +254,18 @@ module.exports = class PetController {
 
     await Pet.findByIdAndUpdate(id, updateData)
 
+    console.log(pet)
+
     res.status(200).json({ pet: pet, message: 'Pet atualizado com sucesso!' })
   }
 
-  // schedule a visit
   static async schedule(req, res) {
     const id = req.params.id
 
-    // check if pet exists
     const pet = await Pet.findOne({ _id: id })
 
-    // check if user owns this pet
     const token = getToken(req)
     const user = await getUserByToken(token)
-
-    console.log(pet)
 
     if (pet.user._id.equals(user._id)) {
       res.status(422).json({
@@ -282,7 +274,6 @@ module.exports = class PetController {
       return
     }
 
-    // check if user has already adopted this pet
     if (pet.adopter) {
       if (pet.adopter._id.equals(user._id)) {
         res.status(422).json({
@@ -292,16 +283,15 @@ module.exports = class PetController {
       }
     }
 
-    // add user to pet
     pet.adopter = {
       _id: user._id,
       name: user.name,
       image: user.image,
     }
 
-    console.log(pet)
-
     await Pet.findByIdAndUpdate(pet._id, pet)
+
+    console.log(pet)
 
     res.status(200).json({
       message: `A visita foi agendada com sucesso, entre em contato com ${pet.user.name} no telefone: ${pet.user.phone}`,
@@ -318,6 +308,7 @@ module.exports = class PetController {
     pet.available = false
 
     await Pet.findByIdAndUpdate(pet._id, pet)
+    console.log(pet)
 
     res.status(200).json({
       pet: pet,

@@ -19,7 +19,7 @@ const Pet = mongoose.model(
       type: Number,
       required: true,
     },
-    color: {
+    species: {
       type: String,
       required: true,
     },
@@ -27,12 +27,15 @@ const Pet = mongoose.model(
       type: Array,
       required: true,
     },
+    obs: {
+      type: String,
+    },
     available: {
       type: Boolean,
     },
     user: Object,
     adopter: Object,
-  }, {timestamps: true}),
+  }, { timestamps: true }),
 )
 
 module.exports = Pet

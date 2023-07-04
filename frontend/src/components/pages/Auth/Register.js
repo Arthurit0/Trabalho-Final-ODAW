@@ -22,7 +22,7 @@ function Register() {
 
   return (
     <section className={styles.form_container}>
-      <h1>Registrar</h1>
+      <h1>Cadastro</h1>
       <form onSubmit={handleSubmit}>
         <Input
           text="Nome"
@@ -33,7 +33,7 @@ function Register() {
         />
         <Input
           text="Telefone"
-          type="text"
+          type="phone"
           name="phone"
           placeholder="Digite o seu telefone"
           handleOnChange={handleChange}

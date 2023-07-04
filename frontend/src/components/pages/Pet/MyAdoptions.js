@@ -25,7 +25,7 @@ function MyAdoptions() {
   return (
     <section>
       <div className={styles.petslist_header}>
-        <h1>Minhas adoções</h1>
+        <h1>Adoções</h1>
       </div>
       <div className={styles.petslist_container}>
         {pets.length > 0 &&

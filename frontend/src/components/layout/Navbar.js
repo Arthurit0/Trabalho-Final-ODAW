@@ -26,13 +26,13 @@ function Navbar() {
         {authenticated ? (
           <>
             <li>
-              <Link to="/pet/myadoptions">Minhas Adoções</Link>
+              <Link to="/pet/myadoptions">Adoções</Link>
             </li>
             <li>
               <Link to="/pet/mypets">Meus Pets</Link>
             </li>
             <li>
-              <Link to="/user/profile">Meu Perfil</Link>
+              <Link to="/user/profile">Perfil</Link>
             </li>
             <li onClick={logout}>Sair</li>
           </>
@@ -42,7 +42,7 @@ function Navbar() {
               <Link to="/login">Entrar</Link>
             </li>
             <li>
-              <Link to="/register">Registrar</Link>
+              <Link to="/register">Cadastro</Link>
             </li>
           </>
         )}
