@@ -44,8 +44,15 @@ function MyAdoptions() {
                 <p>
                   <span className="bold">Telefone:</span> {pet.user.phone}
                 </p>
+
+
+              </div>
+              <div className={styles.contacts}>
                 <p>
                   <span className="bold">Email:</span> {pet.user.email}
+                </p>
+                <p>
+                  <span className="bold">Cidade:</span> {pet.user.city}
                 </p>
 
               </div>

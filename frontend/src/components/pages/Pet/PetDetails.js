@@ -86,6 +86,9 @@ function PetDetails() {
             <p>
               <span className='bold'>Telefone:</span> {pet.user.phone}
             </p>
+            <p>
+              <span className='bold'>Cidade:</span> {pet.user.city}
+            </p>
           </div>
 
 

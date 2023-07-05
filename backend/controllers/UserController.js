@@ -14,6 +14,7 @@ module.exports = class UserController {
     const name = req.body.name
     const email = req.body.email
     const phone = req.body.phone
+    const city = req.body.city
     const password = req.body.password
     const confirmpassword = req.body.confirmpassword
 
@@ -30,6 +31,11 @@ module.exports = class UserController {
 
     if (!phone) {
       res.status(422).json({ message: 'O telefone é obrigatório!' })
+      return
+    }
+
+    if (!city) {
+      res.status(422).json({ message: 'A cidade é obrigatória!' })
       return
     }
 
@@ -66,6 +72,7 @@ module.exports = class UserController {
     const user = new User({
       name: name,
       email: email,
+      city: city,
       phone: phone,
       password: passwordHash,
     })
@@ -151,6 +158,7 @@ module.exports = class UserController {
 
     const name = req.body.name
     const email = req.body.email
+    const city = req.body.city
     const phone = req.body.phone
     const password = req.body.password
     const confirmpassword = req.body.confirmpassword
@@ -190,6 +198,11 @@ module.exports = class UserController {
 
     if (!phone) {
       res.status(422).json({ message: 'O telefone é obrigatório!' })
+      return
+    }
+
+    if (!city) {
+      res.status(422).json({ message: 'A cidade é obrigatória!' })
       return
     }
 

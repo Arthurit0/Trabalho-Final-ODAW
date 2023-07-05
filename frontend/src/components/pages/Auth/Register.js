@@ -45,6 +45,13 @@ function Register() {
           handleOnChange={handleChange}
         />
         <Input
+          text="Cidade"
+          type="text"
+          name="city"
+          placeholder="Digite a sua cidade"
+          handleOnChange={handleChange}
+        />
+        <Input
           text="Senha"
           type="password"
           name="password"

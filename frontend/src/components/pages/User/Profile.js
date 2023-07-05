@@ -118,6 +118,14 @@ function Profile() {
           value={user.phone || ''}
         />
         <Input
+          text="Cidade"
+          type="text"
+          name="city"
+          placeholder="Digite a sua cidade"
+          handleOnChange={handleChange}
+          value={user.city || ''}
+        />
+        <Input
           text="Senha"
           type="password"
           name="password"

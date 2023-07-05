@@ -65,6 +65,7 @@ module.exports = class PetController {
         image: user.image,
         phone: user.phone,
         email: user.email,
+        city: user.city,
       },
     })
 

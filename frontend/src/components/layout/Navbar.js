@@ -14,12 +14,9 @@ function Navbar() {
     <nav className={styles.navbar}>
       <div className={styles.navbar_logo}>
         <img src={Logo} alt="Get A Pet" />
-        <h2>PetConnect</h2>
+        <h2><Link to='/'>PetConnect</Link></h2>
       </div>
       <ul>
-        <li>
-          <Link to="/">Adotar</Link>
-        </li>
         {authenticated ? (
           <>
             <li>
