@@ -5,7 +5,6 @@ import { useParams, Link } from 'react-router-dom'
 
 import styles from './PetDetails.module.css'
 
-/* hooks */
 import useFlashMessage from '../../../hooks/useFlashMessage'
 
 function PetDetails() {
@@ -75,7 +74,18 @@ function PetDetails() {
             <p>
               <span className="bold">Observações sobre o pet:</span> {pet.obs}
             </p>
-
+            <p>
+              <span className="bold"><br />Informações sobre o dono:<br /></span>
+            </p>
+            <p>
+              <span className='bold'>Nome:</span> {pet.user.name}
+            </p>
+            <p>
+              <span className='bold'>E-mail:</span> {pet.user.email}
+            </p>
+            <p>
+              <span className='bold'>Telefone:</span> {pet.user.phone}
+            </p>
           </div>
 
 

@@ -6,7 +6,11 @@
     margin-bottom: 0.45em;
 }
 
-.petdetails_header {
+.petdetails_header h1 {
+    margin-bottom: 0.4em;
+}
+
+.petdetails_header p {
     margin-bottom: 1em;
 }
 
@@ -26,7 +30,7 @@
     /* Texto */
     text-align: left;
     overflow-wrap: break-word;
-    word-break: break-all;
+    word-break: keep-all;
 }
 
 .pet_images {
@@ -36,8 +40,10 @@
 }
 
 .pet_images img {
-    max-height: 200px;
+    max-height: 300px;
     margin-right: 1em;
+    border: 0.2em solid black;
+    border-radius: 1em;
 }
 
 .pet_details_container button {
