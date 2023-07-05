@@ -23,6 +23,10 @@ const Pet = mongoose.model(
       type: String,
       required: true,
     },
+    subspecies: {
+      type: String,
+      required: true
+    },
     images: {
       type: Array,
       required: true,

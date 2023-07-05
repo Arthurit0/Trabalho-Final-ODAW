@@ -31,7 +31,13 @@ function Home() {
               ></div>
               <h3>{pet.name}</h3>
               <p>
+                <span className="bold">Espécie:</span> {pet.species}
+              </p>
+              <p>
                 <span className="bold">Peso:</span> {pet.weight}kg
+              </p>
+              <p>
+                <span className="bold">Idade:</span> {pet.age} anos
               </p>
               {pet.available ? (
                 <Link to={`/pet/${pet._id}`}>Mais detalhes</Link>

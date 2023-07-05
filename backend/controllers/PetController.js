@@ -10,9 +10,10 @@ module.exports = class PetController {
   static async create(req, res) {
     const name = req.body.name
     const age = req.body.age
-    const description = req.body.description
     const weight = req.body.weight
     const species = req.body.species
+    const subspecies = req.body.subspecies
+    const obs = req.body.obs
     const images = req.files
     const available = true
 
@@ -37,6 +38,11 @@ module.exports = class PetController {
       return
     }
 
+    if (!species) {
+      res.status(422).json({ message: 'A subespécie é obrigatória!' })
+      return
+    }
+
     if (!images) {
       res.status(422).json({ message: 'A imagem é obrigatória!' })
       return
@@ -50,9 +56,10 @@ module.exports = class PetController {
     const pet = new Pet({
       name: name,
       age: age,
-      description: description,
       weight: weight,
       species: species,
+      subspecies: subspecies,
+      obs: obs,
       available: available,
       images: [],
 
@@ -61,6 +68,7 @@ module.exports = class PetController {
         name: user.name,
         image: user.image,
         phone: user.phone,
+        email: user.email,
       },
     })
 
@@ -178,9 +186,10 @@ module.exports = class PetController {
     const id = req.params.id
     const name = req.body.name
     const age = req.body.age
-    const description = req.body.description
     const weight = req.body.weight
     const species = req.body.species
+    const subspecies = req.body.subspecies
+    const obs = req.body.obs
     const images = req.files
     const available = req.body.available
 
@@ -233,6 +242,13 @@ module.exports = class PetController {
       updateData.species = species
     }
 
+    if (!subspecies) {
+      res.status(422).json({ message: 'A subespécie é obrigatória!' })
+      return
+    } else {
+      updateData.subspecies = subspecies
+    }
+
     if (!images) {
       res.status(422).json({ message: 'A imagem é obrigatória!' })
       return
@@ -250,7 +266,7 @@ module.exports = class PetController {
       updateData.available = available
     }
 
-    updateData.description = description
+    updateData.obs = obs
 
     await Pet.findByIdAndUpdate(id, updateData)
 
@@ -285,8 +301,10 @@ module.exports = class PetController {
 
     pet.adopter = {
       _id: user._id,
-      name: user.name,
+      email: user.email,
       image: user.image,
+      name: user.name,
+      phone: user.phone,
     }
 
     await Pet.findByIdAndUpdate(pet._id, pet)
@@ -294,7 +312,7 @@ module.exports = class PetController {
     console.log(pet)
 
     res.status(200).json({
-      message: `A visita foi agendada com sucesso, entre em contato com ${pet.user.name} no telefone: ${pet.user.phone}`,
+      message: `A visita foi agendada com sucesso, entre em contato com ${pet.user.name} no telefone: ${pet.user.phone} ou email: ${pet.user.email}`,
     })
   }
 

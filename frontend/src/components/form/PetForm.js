@@ -4,13 +4,13 @@ import formStyles from './Form.module.css'
 
 import Input from './Input'
 import Select from './Select'
+import TextBox from './TextBox'
 
 function PetForm({ handleSubmit, petData, btnText }) {
   const [pet, setPet] = useState(petData || {})
   const [preview, setPreview] = useState([])
   const species = { 'Cachorro': ['Labrador', 'Pastor Alemão', 'Pinstcher', 'Não especificado'], 'Gato': ['Siamês', 'Persa', 'Angorá', 'Não especificado'], 'Roedor': ['Hamster', 'Twister', 'Porquinho-da-Índia', 'Não especificado'], 'Pássaro': ['Papagaio', 'Canário', 'Cacatua', 'Não especificado'] }
-
-  // const colors = ['Branco', 'Preto', 'Cinza', 'Caramelo']
+  const [subspecies, setSubspescies] = useState(petData ? species[petData.species] : [])
 
   function onFileChange(e) {
     console.log(Array.from(e.target.files))
@@ -22,17 +22,21 @@ function PetForm({ handleSubmit, petData, btnText }) {
     setPet({ ...pet, [e.target.name]: e.target.value })
   }
 
-  // function handleColor(e) {
-  //   setPet({
-  //     ...pet,
-  //     color: e.target.options[e.target.selectedIndex].text,
-  //   })
-  // }
-
   function handleSpecies(e) {
+    const selectedSpecies = e.target.options[e.target.selectedIndex].text;
+
     setPet({
       ...pet,
-      species: e.target.options[e.target.selectedIndex].text,
+      species: selectedSpecies
+    })
+
+    setSubspescies(species[selectedSpecies]);
+  }
+
+  function handleSubspecies(e) {
+    setPet({
+      ...pet,
+      subspecies: e.target.options[e.target.selectedIndex].text,
     })
   }
 
@@ -76,6 +80,7 @@ function PetForm({ handleSubmit, petData, btnText }) {
         handleOnChange={handleChange}
         value={pet.name || ''}
       />
+
       <Input
         text="Idade do Pet"
         type="number"
@@ -84,6 +89,7 @@ function PetForm({ handleSubmit, petData, btnText }) {
         handleOnChange={handleChange}
         value={pet.age || ''}
       />
+
       <Input
         text="Peso do Pet"
         type="number"
@@ -92,12 +98,29 @@ function PetForm({ handleSubmit, petData, btnText }) {
         value={pet.weight || ''}
         handleOnChange={handleChange}
       />
+
       <Select
         name="especie"
         text="Selecione a espécie"
         options={Object.keys(species)}
         handleOnChange={handleSpecies}
         value={pet.species || ''}
+      />
+
+      <Select
+        name="subespecie"
+        text="Especifique a subespécie"
+        options={subspecies}
+        handleOnChange={handleSubspecies}
+        value={pet.subspecies || ''}
+      />
+
+      <TextBox
+        name="obs"
+        text="Observações do animal"
+        placeholder="Adicione informações particulares de cuidado, como temperamento, doenças, alergias, etc."
+        handleOnChange={handleChange}
+        value={pet.obs || ''}
       />
 
       {/* <Select

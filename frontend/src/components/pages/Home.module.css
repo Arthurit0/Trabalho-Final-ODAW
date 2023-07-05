@@ -30,13 +30,14 @@
 
 .pet_card h3 {
     color: #222222;
-    margin-bottom: 1em;
+    margin-bottom: 0.2em;
     font-size: 1.6em;
     padding: 8px;
 }
 
 .pet_card p {
-    margin-bottom: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
 }
 
 .pet_card a {

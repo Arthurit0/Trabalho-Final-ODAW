@@ -24,7 +24,7 @@ function PetDetails() {
     let msgType = 'success'
 
     const data = await api
-      .patch(`pets/schedule/${pet._id}`, {
+      .patch(`pets/schedule/${pet._id}`, {}, {
         headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
         },
@@ -47,8 +47,8 @@ function PetDetails() {
       {pet.name && (
         <section className={styles.pet_details_container}>
           <div className={styles.petdetails_header}>
-            <h1>Conhecendo o Pet: {pet.name}</h1>
-            <p>Se tiver interesse, marque uma visita para conhecê-lo!</p>
+            <h1>{pet.name}</h1>
+            <p>Se tiver interesse, clique no botão verde e entre em contato com o dono!</p>
           </div>
           <div className={styles.pet_images}>
             {pet.images.map((image, index) => (
@@ -59,15 +59,26 @@ function PetDetails() {
               />
             ))}
           </div>
-          <p>
-            <span className="bold">Peso:</span> {pet.weight}kg
-          </p>
-          <p>
-            <span className="bold">Idade:</span> {pet.age} anos
-          </p>
-          <p>
-            <span className='bold'>Espécie:</span> {pet.species}
-          </p>
+          <div className={styles.pet_details_p_container}>
+            <p>
+              <span className='bold'>Espécie:</span> {pet.species}
+            </p>
+            <p>
+              <span className='bold'>Subespécie:</span> {pet.subspecies}
+            </p>
+            <p>
+              <span className="bold">Peso:</span> {pet.weight}kg
+            </p>
+            <p>
+              <span className="bold">Idade:</span> {pet.age} anos
+            </p>
+            <p>
+              <span className="bold">Observações sobre o pet:</span> {pet.obs}
+            </p>
+
+          </div>
+
+
           {token ? (
             <button onClick={schedule}>Solicitar uma Visita</button>
           ) : (

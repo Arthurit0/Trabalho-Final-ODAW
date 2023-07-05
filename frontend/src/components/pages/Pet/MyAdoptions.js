@@ -39,11 +39,15 @@ function MyAdoptions() {
               <span className="bold">{pet.name}</span>
               <div className={styles.contacts}>
                 <p>
-                  <span className="bold">Ligue para:</span> {pet.user.phone}
+                  <span className="bold">Dono:</span> {pet.user.name}
                 </p>
                 <p>
-                  <span className="bold">Fale com:</span> {pet.user.name}
+                  <span className="bold">Telefone:</span> {pet.user.phone}
                 </p>
+                <p>
+                  <span className="bold">Email:</span> {pet.user.email}
+                </p>
+
               </div>
               <div className={styles.actions}>
                 {pet.available ? (
