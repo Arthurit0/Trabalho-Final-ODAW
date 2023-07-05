@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 import styles from '../../form/Form.module.css'
 
-/* contexts */
 import { Context } from '../../../context/UserContext'
 
 function Login() {

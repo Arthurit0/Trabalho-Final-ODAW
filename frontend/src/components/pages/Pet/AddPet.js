@@ -7,7 +7,6 @@ import styles from './AddPet.module.css'
 
 import PetForm from '../../form/PetForm'
 
-/* hooks */
 import useFlashMessage from '../../../hooks/useFlashMessage'
 
 function AddPet() {

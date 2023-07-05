@@ -19,7 +19,7 @@ function TextBox({
 
     useEffect(() => {
         handleInput();
-    }, [value]); // Chama handleInput sempre que o valor muda
+    }, [value]);
 
     return (
         <div className={styles.form_control}>

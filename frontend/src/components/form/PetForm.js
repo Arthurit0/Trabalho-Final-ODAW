@@ -72,6 +72,7 @@ function PetForm({ handleSubmit, petData, btnText }) {
         handleOnChange={onFileChange}
         multiple={true}
       />
+
       <Input
         text="Nome do Pet"
         type="text"
@@ -122,15 +123,6 @@ function PetForm({ handleSubmit, petData, btnText }) {
         handleOnChange={handleChange}
         value={pet.obs || ''}
       />
-
-      {/* <Select
-        name="color"
-        text="Selecione a categoria"
-        options={colors}
-        handleOnChange={handleColor}
-        value={pet.color || ''}
-      /> */}
-
 
       <input type="submit" value={btnText} />
     </form>

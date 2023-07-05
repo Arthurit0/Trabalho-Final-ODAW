@@ -6,7 +6,6 @@ const getToken = require('../helpers/get-token')
 const ObjectId = require('mongoose').Types.ObjectId
 
 module.exports = class PetController {
-  // Cria Pet
   static async create(req, res) {
     const name = req.body.name
     const age = req.body.age
@@ -17,7 +16,6 @@ module.exports = class PetController {
     const images = req.files
     const available = true
 
-    // Validações
     if (!name) {
       res.status(422).json({ message: 'O nome é obrigatório!' })
       return
@@ -48,11 +46,9 @@ module.exports = class PetController {
       return
     }
 
-    // get user
     const token = getToken(req)
     const user = await getUserByToken(token)
 
-    // create pet
     const pet = new Pet({
       name: name,
       age: age,
@@ -88,7 +84,6 @@ module.exports = class PetController {
     }
   }
 
-  // Puxar todos os Pets registrados
   static async getAll(req, res) {
     const pets = await Pet.find().sort('-createdAt')
 
@@ -97,9 +92,7 @@ module.exports = class PetController {
     })
   }
 
-  // Puxar todos os pets do usuário
   static async getAllUserPets(req, res) {
-    // get user
     const token = getToken(req)
     const user = await getUserByToken(token)
 
@@ -110,9 +103,7 @@ module.exports = class PetController {
     })
   }
 
-  // Puxar todas as adoções do usuário
   static async getAllUserAdoptions(req, res) {
-    // get user
     const token = getToken(req)
     const user = await getUserByToken(token)
 
@@ -123,17 +114,14 @@ module.exports = class PetController {
     })
   }
 
-  // Puxar um pet específico pelo Id
   static async getPetById(req, res) {
     const id = req.params.id
 
-    // Checa se id é válido
     if (!ObjectId.isValid(id)) {
       res.status(422).json({ message: 'ID inválido!' })
       return
     }
 
-    // Puxa o pet se existir
     const pet = await Pet.findOne({ _id: id })
 
     if (!pet) {
@@ -146,17 +134,14 @@ module.exports = class PetController {
     })
   }
 
-  // Remover um pet com seu ID
   static async removePetById(req, res) {
     const id = req.params.id
 
-    // Checa ID
     if (!ObjectId.isValid(id)) {
       res.status(422).json({ message: 'ID inválido!' })
       return
     }
 
-    // Checa Pet
     const pet = await Pet.findOne({ _id: id })
 
     if (!pet) {
@@ -164,7 +149,6 @@ module.exports = class PetController {
       return
     }
 
-    // Checar se foi o usuário que pediu para apagar que registrou
     const token = getToken(req)
     const user = await getUserByToken(token)
 
@@ -181,7 +165,6 @@ module.exports = class PetController {
     res.status(200).json({ message: 'Pet removido com sucesso!' })
   }
 
-  // Atualizar Pet
   static async updatePet(req, res) {
     const id = req.params.id
     const name = req.body.name
@@ -195,7 +178,6 @@ module.exports = class PetController {
 
     const updateData = {}
 
-    // Checa se o pet existe
     const pet = await Pet.findOne({ _id: id })
 
     if (!pet) {
@@ -316,11 +298,9 @@ module.exports = class PetController {
     })
   }
 
-  // conclude a pet adoption
   static async concludeAdoption(req, res) {
     const id = req.params.id
 
-    // check if pet exists
     const pet = await Pet.findOne({ _id: id })
 
     pet.available = false
