@@ -1,25 +1,32 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import formStyles from './Form.module.css'
+import formStyles from "./Form.module.css";
 
-import Input from './Input'
-import Select from './Select'
-import TextBox from './TextBox'
+import Input from "./Input";
+import Select from "./Select";
+import TextBox from "./TextBox";
 
 function PetForm({ handleSubmit, petData, btnText }) {
-  const [pet, setPet] = useState(petData || {})
-  const [preview, setPreview] = useState([])
-  const species = { 'Cachorro': ['Labrador', 'Pastor Alemão', 'Pinstcher', 'Não especificado'], 'Gato': ['Siamês', 'Persa', 'Angorá', 'Não especificado'], 'Roedor': ['Hamster', 'Twister', 'Porquinho-da-Índia', 'Não especificado'], 'Pássaro': ['Papagaio', 'Canário', 'Cacatua', 'Não especificado'] }
-  const [subspecies, setSubspescies] = useState(petData ? species[petData.species] : [])
+  const [pet, setPet] = useState(petData || {});
+  const [preview, setPreview] = useState([]);
+  const species = {
+    Cachorro: ["Labrador", "Pastor Alemão", "Pinstcher", "Não especificado"],
+    Gato: ["Siamês", "Persa", "Angorá", "Não especificado"],
+    Roedor: ["Hamster", "Twister", "Porquinho-da-Índia", "Não especificado"],
+    Pássaro: ["Papagaio", "Canário", "Cacatua", "Não especificado"],
+  };
+  const [subspecies, setSubspescies] = useState(
+    petData ? species[petData.species] : [],
+  );
 
   function onFileChange(e) {
-    console.log(Array.from(e.target.files))
-    setPreview(Array.from(e.target.files))
-    setPet({ ...pet, images: [...e.target.files] })
+    console.log(Array.from(e.target.files));
+    setPreview(Array.from(e.target.files));
+    setPet({ ...pet, images: [...e.target.files] });
   }
 
   function handleChange(e) {
-    setPet({ ...pet, [e.target.name]: e.target.value })
+    setPet({ ...pet, [e.target.name]: e.target.value });
   }
 
   function handleSpecies(e) {
@@ -27,8 +34,8 @@ function PetForm({ handleSubmit, petData, btnText }) {
 
     setPet({
       ...pet,
-      species: selectedSpecies
-    })
+      species: selectedSpecies,
+    });
 
     setSubspescies(species[selectedSpecies]);
   }
@@ -37,33 +44,33 @@ function PetForm({ handleSubmit, petData, btnText }) {
     setPet({
       ...pet,
       subspecies: e.target.options[e.target.selectedIndex].text,
-    })
+    });
   }
 
   const submit = (e) => {
-    e.preventDefault()
-    handleSubmit(pet)
-  }
+    e.preventDefault();
+    handleSubmit(pet);
+  };
 
   return (
     <form onSubmit={submit} className={formStyles.form_container}>
       <div className={formStyles.preview_pet_images}>
         {preview.length > 0
           ? preview.map((image, index) => (
-            <img
-              src={URL.createObjectURL(image)}
-              alt={pet.name}
-              key={`${pet.name}+${index}`}
-            />
-          ))
+              <img
+                src={URL.createObjectURL(image)}
+                alt={pet.name}
+                key={`${pet.name}+${index}`}
+              />
+            ))
           : pet.images &&
-          pet.images.map((image, index) => (
-            <img
-              src={`${process.env.REACT_APP_API}/images/pets/${image}`}
-              alt={pet.name}
-              key={`${pet.name}+${index}`}
-            />
-          ))}
+            pet.images.map((image, index) => (
+              <img
+                src={`${process.env.REACT_APP_API}/images/pets/${image}`}
+                alt={pet.name}
+                key={`${pet.name}+${index}`}
+              />
+            ))}
       </div>
       <Input
         text="Imagens do Pet"
@@ -79,7 +86,7 @@ function PetForm({ handleSubmit, petData, btnText }) {
         name="name"
         placeholder="Digite o nome"
         handleOnChange={handleChange}
-        value={pet.name || ''}
+        value={pet.name || ""}
       />
 
       <Input
@@ -88,7 +95,7 @@ function PetForm({ handleSubmit, petData, btnText }) {
         name="age"
         placeholder="Digite a idade"
         handleOnChange={handleChange}
-        value={pet.age || ''}
+        value={pet.age || ""}
       />
 
       <Input
@@ -96,7 +103,7 @@ function PetForm({ handleSubmit, petData, btnText }) {
         type="number"
         name="weight"
         placeholder="Digite o peso aproximado"
-        value={pet.weight || ''}
+        value={pet.weight || ""}
         handleOnChange={handleChange}
       />
 
@@ -105,7 +112,7 @@ function PetForm({ handleSubmit, petData, btnText }) {
         text="Selecione a espécie"
         options={Object.keys(species)}
         handleOnChange={handleSpecies}
-        value={pet.species || ''}
+        value={pet.species || ""}
       />
 
       <Select
@@ -113,7 +120,7 @@ function PetForm({ handleSubmit, petData, btnText }) {
         text="Especifique a subespécie"
         options={subspecies}
         handleOnChange={handleSubspecies}
-        value={pet.subspecies || ''}
+        value={pet.subspecies || ""}
       />
 
       <TextBox
@@ -121,12 +128,12 @@ function PetForm({ handleSubmit, petData, btnText }) {
         text="Observações do animal"
         placeholder="Adicione informações particulares de cuidado, como temperamento, doenças, alergias, etc."
         handleOnChange={handleChange}
-        value={pet.obs || ''}
+        value={pet.obs || ""}
       />
 
       <input type="submit" value={btnText} />
     </form>
-  )
+  );
 }
 
-export default PetForm
+export default PetForm;

@@ -14,7 +14,7 @@ router.patch(
   "/edit/:id",
   verifyToken,
   imageUpload.single("image"),
-  UserController.editUser
+  UserController.editUser,
 );
 
 module.exports = router;

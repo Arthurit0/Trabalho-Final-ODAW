@@ -6,7 +6,7 @@ const createUserToken = async (user, req, res) => {
       name: user.name,
       id: user._id,
     },
-    "nossosecret"
+    "nossosecret",
   );
 
   res.status(200).json({
@@ -15,7 +15,7 @@ const createUserToken = async (user, req, res) => {
     userId: user._id,
   });
 
-  console.log(token)
+  console.log(token);
 };
 
 module.exports = createUserToken;

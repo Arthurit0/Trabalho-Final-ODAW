@@ -1,4 +1,4 @@
-import styles from './Select.module.css'
+import styles from "./Select.module.css";
 
 function Select({ text, name, options, handleOnChange, value }) {
   return (
@@ -8,7 +8,7 @@ function Select({ text, name, options, handleOnChange, value }) {
         name={name}
         id={name}
         onChange={handleOnChange}
-        value={value || ''}
+        value={value || ""}
       >
         <option>Selecione uma opção</option>
         {options.map((option) => (
@@ -18,7 +18,7 @@ function Select({ text, name, options, handleOnChange, value }) {
         ))}
       </select>
     </div>
-  )
+  );
 }
 
-export default Select
+export default Select;
