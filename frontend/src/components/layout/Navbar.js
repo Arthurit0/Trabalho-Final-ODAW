@@ -30,7 +30,10 @@ function Navbar() {
             <li>
               <Link to="/user/profile">Perfil</Link>
             </li>
-            <li onClick={logout}>Sair</li>
+            <li onClick={logout}>
+              {" "}
+              <a>Sair</a>
+            </li>
           </>
         ) : (
           <>
