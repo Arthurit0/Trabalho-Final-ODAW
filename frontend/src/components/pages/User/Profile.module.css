@@ -1,4 +1,31 @@
 .profile_header {
   text-align: center;
-  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: clamp(1.4rem, 4vw, 2.1rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(77, 182, 172, 0.16), rgba(255, 255, 255, 0.9)),
+    var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+.profile_header p {
+  max-width: 38rem;
+}
+
+.profile_header img {
+  width: clamp(140px, 24vw, 200px);
+  height: clamp(140px, 24vw, 200px);
+}
+
+@media (max-width: 640px) {
+  .profile_header {
+    padding: 1.2rem;
+    border-radius: var(--radius-lg);
+  }
 }

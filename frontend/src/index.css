@@ -1,28 +1,121 @@
 @font-face {
-  font-family: "Confortaa";
+  font-family: "Comfortaa";
   src:
-    local("Confortaa"),
+    local("Comfortaa"),
     url("./fonts/Comfortaa.ttf") format("truetype");
+}
+
+:root {
+  --bg: #f4fbfa;
+  --surface: rgba(255, 255, 255, 0.9);
+  --surface-strong: #ffffff;
+  --border: rgba(34, 34, 34, 0.08);
+  --text: #1e293b;
+  --muted: #5b6472;
+  --primary: #4db6ac;
+  --primary-dark: #2f8f86;
+  --accent: #ffd54f;
+  --accent-dark: #f4b400;
+  --success: #25b456;
+  --shadow-lg: 0 20px 45px rgba(31, 41, 55, 0.12);
+  --shadow-md: 0 14px 30px rgba(15, 23, 42, 0.08);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
 }
 
 * {
   padding: 0;
   margin: 0;
-  font-family: "Confortaa", serif;
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "Comfortaa", "Trebuchet MS", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(77, 182, 172, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(255, 213, 79, 0.18), transparent 24%),
+    linear-gradient(180deg, #f8fcfb 0%, #eef6f5 100%);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: "Comfortaa", "Trebuchet MS", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+section {
+  width: 100%;
+}
+
 h1 {
-  color: #222222;
-  margin-bottom: 1em;
-  font-size: 2.1em;
+  color: var(--text);
+  margin-bottom: 0.3em;
+  padding-bottom: 0.15em;
+  font-size: clamp(2rem, 5vw, 2rem);
+  line-height: 1.05;
+}
+
+h2,
+h3 {
+  color: var(--text);
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .bold {
-  font-weight: bold;
-  color: #222222;
+  font-weight: 700;
+  color: var(--text);
 }
 
-html {
-  background-color: #f2f2f2;
+::selection {
+  background: rgba(255, 213, 79, 0.45);
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
 }

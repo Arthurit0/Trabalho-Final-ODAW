@@ -9,27 +9,36 @@ function Message() {
   let [type, setType] = useState("");
 
   useEffect(() => {
-    bus.addListener("flash", ({ message, type }) => {
+    let timeoutId;
+
+    const handleFlash = ({ message, type }) => {
       setVisibility(true);
       setMessage(message);
       setType(type);
-      setTimeout(() => {
+
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
         setVisibility(false);
       }, 5000);
-    });
-  }, []);
+    };
 
-  useEffect(() => {
-    if (document.querySelector(".close") !== null) {
-      document
-        .querySelector(".close")
-        .addEventListener("click", () => setVisibility(false));
-    }
-  });
+    bus.addListener("flash", handleFlash);
+
+    return () => {
+      clearTimeout(timeoutId);
+      bus.removeListener("flash", handleFlash);
+    };
+  }, []);
 
   return (
     visibility && (
-      <div className={`${styles.message} ${styles[type]}`}>{message}</div>
+      <div
+        className={`${styles.message} ${styles[type]}`}
+        role="alert"
+        aria-live="polite"
+      >
+        {message}
+      </div>
     )
   );
 }

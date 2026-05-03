@@ -75,6 +75,7 @@ function Profile() {
     <section>
       <div className={styles.profile_header}>
         <h1>Perfil</h1>
+        <p>Mantenha seus dados atualizados para facilitar novos contatos e adoções.</p>
         {(user.image || preview) && (
           <RoundedImage
             src={

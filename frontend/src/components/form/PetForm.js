@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import formStyles from "./Form.module.css";
 
@@ -15,9 +15,10 @@ function PetForm({ handleSubmit, petData, btnText }) {
     Roedor: ["Hamster", "Twister", "Porquinho-da-Índia", "Não especificado"],
     Pássaro: ["Papagaio", "Canário", "Cacatua", "Não especificado"],
   };
-  const [subspecies, setSubspescies] = useState(
-    petData ? species[petData.species] : [],
-  );
+
+  const [subspecies, setSubspescies] = useState(petData ? species[petData.species] : []);
+
+  const previewUrls = useMemo(() => preview.map((image) => URL.createObjectURL(image)), [preview]);
 
   function onFileChange(e) {
     console.log(Array.from(e.target.files));
@@ -56,29 +57,25 @@ function PetForm({ handleSubmit, petData, btnText }) {
     <form onSubmit={submit} className={formStyles.form_container}>
       <div className={formStyles.preview_pet_images}>
         {preview.length > 0
-          ? preview.map((image, index) => (
-              <img
-                src={URL.createObjectURL(image)}
-                alt={pet.name}
-                key={`${pet.name}+${index}`}
-              />
-            ))
+          ? previewUrls.map((url, index) => <img src={url} alt={pet.name} key={index} />)
           : pet.images &&
             pet.images.map((image, index) => (
               <img
                 src={`${process.env.REACT_APP_API}/images/pets/${image}`}
                 alt={pet.name}
-                key={`${pet.name}+${index}`}
+                key={index}
               />
             ))}
       </div>
-      <Input
-        text="Imagens do Pet"
-        type="file"
-        name="images"
-        handleOnChange={onFileChange}
-        multiple={true}
-      />
+      <div>
+        <Input
+          text="Imagens do Pet"
+          type="file"
+          name="images"
+          handleOnChange={onFileChange}
+          multiple={true}
+        />
+      </div>
 
       <Input
         text="Nome do Pet"

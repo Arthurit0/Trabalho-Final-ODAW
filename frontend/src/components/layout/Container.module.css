@@ -1,6 +1,13 @@
 .container {
-  min-height: 60vh;
-  padding: 1em 2em 3em;
-  max-width: 1200px;
+  flex: 1;
+  width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
+  padding: clamp(1.5rem, 3vw, 2.75rem) 0 4rem;
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: calc(100% - 1.25rem);
+    padding: 1.25rem 0 3rem;
+  }
 }

@@ -20,57 +20,60 @@ function Register() {
   }
 
   return (
-    <section className={styles.form_container}>
-      <h1>Cadastro</h1>
-      <form onSubmit={handleSubmit}>
-        <Input
-          text="Nome"
-          type="text"
-          name="name"
-          placeholder="Digite o seu nome"
-          handleOnChange={handleChange}
-        />
-        <Input
-          text="Telefone"
-          type="phone"
-          name="phone"
-          placeholder="Digite o seu telefone"
-          handleOnChange={handleChange}
-        />
-        <Input
-          text="E-mail"
-          type="email"
-          name="email"
-          placeholder="Digite o seu e-mail"
-          handleOnChange={handleChange}
-        />
-        <Input
-          text="Cidade"
-          type="text"
-          name="city"
-          placeholder="Digite a sua cidade"
-          handleOnChange={handleChange}
-        />
-        <Input
-          text="Senha"
-          type="password"
-          name="password"
-          placeholder="Digite a sua senha"
-          handleOnChange={handleChange}
-        />
-        <Input
-          text="Confirmação de senha"
-          type="password"
-          name="confirmpassword"
-          placeholder="Confirme a sua senha"
-          handleOnChange={handleChange}
-        />
-        <input type="submit" value="Cadastrar" />
-      </form>
-      <p>
-        Já tem conta? <Link to="/login">Clique aqui.</Link>
-      </p>
-    </section>
+    <div className={styles.auth_wrapper}>
+      <section className={styles.form_container}>
+        <h1>Cadastro</h1>
+        <p className={styles.form_subtitle}>Crie seu perfil e conecte um novo lar aos pets.</p>
+        <form onSubmit={handleSubmit}>
+          <Input
+            text="Nome"
+            type="text"
+            name="name"
+            placeholder="Digite o seu nome"
+            handleOnChange={handleChange}
+          />
+          <Input
+            text="Telefone"
+            type="phone"
+            name="phone"
+            placeholder="Digite o seu telefone"
+            handleOnChange={handleChange}
+          />
+          <Input
+            text="E-mail"
+            type="email"
+            name="email"
+            placeholder="Digite o seu e-mail"
+            handleOnChange={handleChange}
+          />
+          <Input
+            text="Cidade"
+            type="text"
+            name="city"
+            placeholder="Digite a sua cidade"
+            handleOnChange={handleChange}
+          />
+          <Input
+            text="Senha"
+            type="password"
+            name="password"
+            placeholder="Digite a sua senha"
+            handleOnChange={handleChange}
+          />
+          <Input
+            text="Confirmação de senha"
+            type="password"
+            name="confirmpassword"
+            placeholder="Confirme a sua senha"
+            handleOnChange={handleChange}
+          />
+          <input type="submit" value="Cadastrar" />
+        </form>
+        <p>
+          Já tem conta? <Link to="/login">Clique aqui.</Link>
+        </p>
+      </section>
+    </div>
   );
 }
 

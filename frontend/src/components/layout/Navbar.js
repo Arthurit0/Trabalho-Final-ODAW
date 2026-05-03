@@ -13,12 +13,12 @@ function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbar_logo}>
-        <img src={Logo} alt="Get A Pet" />
+        <img src={Logo} alt="PetConnect" />
         <h2>
           <Link to="/">PetConnect</Link>
         </h2>
       </div>
-      <ul>
+      <ul className={styles.nav_links}>
         {authenticated ? (
           <>
             <li>
@@ -30,9 +30,10 @@ function Navbar() {
             <li>
               <Link to="/user/profile">Perfil</Link>
             </li>
-            <li onClick={logout}>
-              {" "}
-              <a>Sair</a>
+            <li>
+              <button type="button" onClick={logout} className={styles.nav_button}>
+                Sair
+              </button>
             </li>
           </>
         ) : (

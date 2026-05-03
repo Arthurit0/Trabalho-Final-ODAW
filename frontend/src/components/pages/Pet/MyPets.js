@@ -79,7 +79,10 @@ function MyPets() {
   return (
     <section>
       <div className={styles.petslist_header}>
-        <h1>Meus Pets Cadastrados</h1>
+        <div>
+          <h1>Meus Pets Cadastrados</h1>
+          <p>Gerencie seus anúncios e acompanhe as adoções em andamento.</p>
+        </div>
         <Link to="/pet/add">Cadastrar Pet</Link>
       </div>
       <div className={styles.petslist_container}>

@@ -20,29 +20,34 @@ function Login() {
   };
 
   return (
-    <section className={styles.form_container}>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <Input
-          text="E-mail"
-          type="email"
-          name="email"
-          placeholder="Digite o e-mail"
-          handleOnChange={handleChange}
-        />
-        <Input
-          text="Senha"
-          type="password"
-          name="password"
-          placeholder="Digite a senha"
-          handleOnChange={handleChange}
-        />
-        <input type="submit" value="Entrar" />
-      </form>
-      <p>
-        Não tem conta? <Link to="/register">Clique aqui.</Link>
-      </p>
-    </section>
+    <div className={styles.auth_wrapper}>
+      <section className={styles.form_container}>
+        <h1>Login</h1>
+        <p className={styles.form_subtitle}>
+          Acesse sua conta para gerenciar pets, visitas e adoções.
+        </p>
+        <form onSubmit={handleSubmit}>
+          <Input
+            text="E-mail"
+            type="email"
+            name="email"
+            placeholder="Digite o e-mail"
+            handleOnChange={handleChange}
+          />
+          <Input
+            text="Senha"
+            type="password"
+            name="password"
+            placeholder="Digite a senha"
+            handleOnChange={handleChange}
+          />
+          <input type="submit" value="Entrar" />
+        </form>
+        <p>
+          Não tem conta? <Link to="/register">Clique aqui.</Link>
+        </p>
+      </section>
+    </div>
   );
 }
 

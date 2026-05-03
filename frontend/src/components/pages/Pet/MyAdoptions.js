@@ -25,7 +25,10 @@ function MyAdoptions() {
   return (
     <section>
       <div className={styles.petslist_header}>
-        <h1>Adoções</h1>
+        <div>
+          <h1>Adoções</h1>
+          <p>Confira os pets que já estão em processo de adoção com você.</p>
+        </div>
       </div>
       <div className={styles.petslist_container}>
         {pets.length > 0 &&
@@ -54,11 +57,7 @@ function MyAdoptions() {
                 </p>
               </div>
               <div className={styles.actions}>
-                {pet.available ? (
-                  <p>Adoção em processo</p>
-                ) : (
-                  <p>Parabéns por concluir a adoção</p>
-                )}
+                {pet.available ? <p>Adoção em processo</p> : <p>Parabéns por concluir a adoção</p>}
               </div>
             </div>
           ))}

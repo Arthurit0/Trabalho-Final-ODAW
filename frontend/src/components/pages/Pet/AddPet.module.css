@@ -1,8 +1,27 @@
 .addpet_header {
   text-align: center;
-  margin-bottom: 1.2em;
+  margin-bottom: 1.5rem;
+  padding: clamp(1.4rem, 4vw, 2.1rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(255, 213, 79, 0.14), rgba(255, 255, 255, 0.9)),
+    var(--surface);
+  box-shadow: var(--shadow-md);
 }
 
 .addpet_header h1 {
   margin-bottom: 0.2em;
+}
+
+.addpet_header p {
+  max-width: 38rem;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .addpet_header {
+    padding: 1.2rem;
+    border-radius: var(--radius-lg);
+  }
 }

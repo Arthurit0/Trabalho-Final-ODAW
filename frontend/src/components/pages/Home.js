@@ -3,6 +3,8 @@ import api from "../../utils/api";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import dogSleep from "../../assets/img/dog-sleep.png";
+
 import styles from "./Home.module.css";
 
 function Home() {
@@ -17,7 +19,18 @@ function Home() {
   return (
     <section>
       <div className={styles.pet_home_header}>
-        <h1>Adote um Pet</h1>
+        <div>
+          <h1>Adote um Pet</h1>
+          <p>
+            Explore os pets cadastrados, compare perfis e encontre um novo companheiro com
+            facilidade.
+          </p>
+        </div>
+        <div className={styles.pet_home_badge}>
+          {pets.length > 0
+            ? `${pets.length === 1 ? "1 pet" : `${pets.length} pets`} esperando por você!`
+            : "Novos pets em breve!"}
+        </div>
       </div>
       <div className={styles.pet_container}>
         {pets.length > 0 &&
@@ -46,10 +59,13 @@ function Home() {
               )}
             </div>
           ))}
-        {pets.length === 0 && (
-          <p>Não há pets cadastrados ou disponíveis para adoção no momento!</p>
-        )}
       </div>
+      {pets.length === 0 && (
+        <div className={styles.empty_state}>
+          <p>Não há pets cadastrados ou disponíveis para adoção no momento!</p>
+          <img src={dogSleep} alt="Cachorro dormindo" />
+        </div>
+      )}
     </section>
   );
 }

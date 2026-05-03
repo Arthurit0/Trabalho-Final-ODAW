@@ -1,22 +1,48 @@
 .message {
-  width: 100%;
-  padding: 1em;
-  border: 1px solid #000;
-  margin: 0 auto;
-  text-align: center;
-  max-width: 60%;
-  margin: 1em auto;
-  border-radius: 5px;
+  position: fixed;
+  top: 5.25rem;
+  right: max(1rem, calc((100vw - 1180px) / 2 + 1rem));
+  width: min(420px, calc(100% - 2rem));
+  padding: 1rem 1.1rem;
+  border: 1px solid transparent;
+  text-align: left;
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(12px);
+  z-index: 30;
+  animation: slide-in 0.25s ease;
 }
 
 .success {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
+  color: #0f5132;
+  background: rgba(212, 237, 218, 0.96);
+  border-color: rgba(25, 135, 84, 0.18);
 }
 
 .error {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
+  color: #842029;
+  background: rgba(248, 215, 218, 0.96);
+  border-color: rgba(220, 53, 69, 0.18);
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .message {
+    top: auto;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    width: auto;
+  }
 }
