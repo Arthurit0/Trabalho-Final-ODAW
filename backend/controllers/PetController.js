@@ -1,4 +1,5 @@
 const Pet = require("../models/Pet");
+const User = require("../models/User");
 
 // Helpers
 const getUserByToken = require("../helpers/get-user-by-token");
@@ -130,8 +131,22 @@ module.exports = class PetController {
       return;
     }
 
+    const petData = pet.toObject();
+    const owner = await User.findById(pet.user._id).select("name image phone email city");
+
+    if (owner) {
+      petData.user = {
+        ...petData.user,
+        name: owner.name,
+        image: owner.image,
+        phone: owner.phone,
+        email: owner.email,
+        city: owner.city,
+      };
+    }
+
     res.status(200).json({
-      pet: pet,
+      pet: petData,
     });
   }
 
@@ -155,8 +170,7 @@ module.exports = class PetController {
 
     if (pet.user._id.toString() != user._id.toString()) {
       res.status(404).json({
-        message:
-          "Houve um problema em processar sua solicitação, tente novamente mais tarde!",
+        message: "Houve um problema em processar sua solicitação, tente novamente mais tarde!",
       });
       return;
     }
@@ -191,8 +205,7 @@ module.exports = class PetController {
 
     if (pet.user._id.toString() != user._id.toString()) {
       res.status(404).json({
-        message:
-          "Houve um problema em processar sua solicitação, tente novamente mais tarde!",
+        message: "Houve um problema em processar sua solicitação, tente novamente mais tarde!",
       });
       return;
     }

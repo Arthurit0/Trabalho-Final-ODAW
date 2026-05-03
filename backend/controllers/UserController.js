@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
+const Pet = require("../models/Pet");
 
 // helpers
 const getUserByToken = require("../helpers/get-user-by-token");
@@ -45,16 +46,12 @@ module.exports = class UserController {
     }
 
     if (!confirmpassword) {
-      res
-        .status(422)
-        .json({ message: "A confirmação de senha é obrigatória!" });
+      res.status(422).json({ message: "A confirmação de senha é obrigatória!" });
       return;
     }
 
     if (password != confirmpassword) {
-      res
-        .status(422)
-        .json({ message: "A senha e a confirmação precisam ser iguais!" });
+      res.status(422).json({ message: "A senha e a confirmação precisam ser iguais!" });
       return;
     }
 
@@ -106,9 +103,7 @@ module.exports = class UserController {
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      return res
-        .status(422)
-        .json({ message: "Não há usuário cadastrado com este e-mail!" });
+      return res.status(422).json({ message: "Não há usuário cadastrado com este e-mail!" });
     }
 
     // check if password match
@@ -209,13 +204,16 @@ module.exports = class UserController {
     }
 
     user.phone = phone;
+    user.city = city;
 
-    // check if password match
-    if (password != confirmpassword) {
-      res.status(422).json({ error: "As senhas não conferem." });
+    const shouldUpdatePassword = password || confirmpassword;
 
-      // change password
-    } else if (password == confirmpassword && password != null) {
+    if (shouldUpdatePassword) {
+      if (!password || !confirmpassword || password !== confirmpassword) {
+        res.status(422).json({ message: "As senhas não conferem." });
+        return;
+      }
+
       // creating password
       const salt = await bcrypt.genSalt(12);
       const reqPassword = req.body.password;
@@ -226,15 +224,27 @@ module.exports = class UserController {
     }
 
     try {
-      // returns updated data
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: user._id },
-        { $set: user },
-        { new: true },
+      const updatedUser = await user.save();
+
+      await Pet.updateMany(
+        { "user._id": updatedUser._id },
+        {
+          $set: {
+            "user.name": updatedUser.name,
+            "user.image": updatedUser.image,
+            "user.phone": updatedUser.phone,
+            "user.email": updatedUser.email,
+            "user.city": updatedUser.city,
+          },
+        },
       );
+
+      const sanitizedUser = updatedUser.toObject();
+      sanitizedUser.password = undefined;
+
       res.json({
         message: "Usuário atualizado com sucesso!",
-        data: updatedUser,
+        user: sanitizedUser,
       });
 
       console.log(updatedUser);
