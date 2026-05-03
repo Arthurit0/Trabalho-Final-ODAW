@@ -32,11 +32,7 @@ function Message() {
 
   return (
     visibility && (
-      <div
-        className={`${styles.message} ${styles[type]}`}
-        role="alert"
-        aria-live="polite"
-      >
+      <div className={`${styles.message} ${styles[type]}`} role="alert" aria-live="polite">
         {message}
       </div>
     )

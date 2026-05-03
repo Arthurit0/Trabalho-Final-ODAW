@@ -1,7 +1,7 @@
 .message {
   position: fixed;
-  top: 5.25rem;
-  right: max(1rem, calc((100vw - 1180px) / 2 + 1rem));
+  top: 6.25rem;
+  right: 1rem;
   width: min(420px, calc(100% - 2rem));
   padding: 1rem 1.1rem;
   border: 1px solid transparent;
