@@ -25,7 +25,7 @@ function Profile() {
         },
       })
       .then((response) => {
-        setUser(response.data);
+        setUser(response.data || {});
       });
   }, [token]);
 
@@ -45,11 +45,9 @@ function Profile() {
 
     const formData = new FormData();
 
-    const userFormData = await Object.keys(user).forEach((key) =>
-      formData.append(key, user[key]),
-    );
-
-    formData.append("user", userFormData);
+    Object.keys(user).forEach((key) => {
+      formData.append(key, user[key]);
+    });
 
     const data = await api
       .patch(`/users/edit/${user._id}`, formData, {
@@ -68,6 +66,11 @@ function Profile() {
         return err.response.data;
       });
 
+    if (msgType === "success" && data.user) {
+      setUser(data.user);
+      setPreview(undefined);
+    }
+
     setFlashMessage(data.message, msgType);
   };
 
@@ -76,24 +79,21 @@ function Profile() {
       <div className={styles.profile_header}>
         <h1>Perfil</h1>
         <p>Mantenha seus dados atualizados para facilitar novos contatos e adoções.</p>
-        {(user.image || preview) && (
-          <RoundedImage
-            src={
-              preview
-                ? URL.createObjectURL(preview)
-                : `${process.env.REACT_APP_API}/images/users/${user.image}`
-            }
-            alt={user.name}
-          />
-        )}
       </div>
       <form onSubmit={handleSubmit} className={formStyles.form_container}>
-        <Input
-          text="Imagem"
-          type="file"
-          name="image"
-          handleOnChange={onFileChange}
-        />
+        {(user.image || preview) && (
+          <div className={styles.profile_image_preview}>
+            <RoundedImage
+              src={
+                preview
+                  ? URL.createObjectURL(preview)
+                  : `${process.env.REACT_APP_API}/images/users/${user.image}`
+              }
+              alt={user.name}
+            />
+          </div>
+        )}
+        <Input text="Imagem" type="file" name="image" handleOnChange={onFileChange} />
         <Input
           text="E-mail"
           type="email"

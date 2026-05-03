@@ -47,6 +47,10 @@
   word-break: keep-all;
 }
 
+.owner_image {
+  margin: 0.4rem 0 0.4rem;
+}
+
 .pet_images {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));

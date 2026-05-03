@@ -6,6 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import styles from "./PetDetails.module.css";
 
 import useFlashMessage from "../../../hooks/useFlashMessage";
+import RoundedImage from "../../layout/RoundedImage";
 
 function PetDetails() {
   const [pet, setPet] = useState({});
@@ -51,10 +52,7 @@ function PetDetails() {
         <section className={styles.pet_details_container}>
           <div className={styles.petdetails_header}>
             <h1>{pet.name}</h1>
-            <p>
-              Se tiver interesse, clique no botão verde e entre em contato com o
-              dono!
-            </p>
+            <p>Se tiver interesse, clique no botão verde e entre em contato com o dono!</p>
           </div>
           <div className={styles.pet_images}>
             {pet.images.map((image, index) => (
@@ -78,14 +76,25 @@ function PetDetails() {
             <p>
               <span className="bold">Idade:</span> {pet.age} anos
             </p>
-            <p>
-              <span className="bold">Observações sobre o pet:</span> {pet.obs}
-            </p>
+            {pet.obs && (
+              <p>
+                <span className="bold">Observações sobre o pet:</span> {pet.obs}
+              </p>
+            )}
             <p>
               <span className="bold">
                 <br />
                 Informações sobre o dono:
                 <br />
+                {pet.user.image && (
+                  <div className={styles.owner_image}>
+                    <RoundedImage
+                      src={`${process.env.REACT_APP_API}/images/users/${pet.user.image}`}
+                      alt={pet.user.name}
+                      width="px120"
+                    />
+                  </div>
+                )}
               </span>
             </p>
             <p>
@@ -106,8 +115,7 @@ function PetDetails() {
             <button onClick={schedule}>Solicitar uma Visita</button>
           ) : (
             <p>
-              Você precisa <Link to="/register">criar uma conta</Link> para
-              solicitar a visita.
+              Você precisa <Link to="/register">criar uma conta</Link> para solicitar a visita.
             </p>
           )}
         </section>

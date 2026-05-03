@@ -9,8 +9,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   background:
-    linear-gradient(135deg, rgba(77, 182, 172, 0.16), rgba(255, 255, 255, 0.9)),
-    var(--surface);
+    linear-gradient(135deg, rgba(77, 182, 172, 0.16), rgba(255, 255, 255, 0.9)), var(--surface);
   box-shadow: var(--shadow-md);
 }
 
@@ -18,7 +17,13 @@
   max-width: 38rem;
 }
 
-.profile_header img {
+.profile_image_preview {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile_image_preview img {
   width: clamp(140px, 24vw, 200px);
   height: clamp(140px, 24vw, 200px);
 }
