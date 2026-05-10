@@ -9,8 +9,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   background:
-    linear-gradient(135deg, rgba(255, 213, 79, 0.14), rgba(255, 255, 255, 0.9)),
-    var(--surface);
+    linear-gradient(135deg, rgba(255, 213, 79, 0.14), rgba(255, 255, 255, 0.9)), var(--surface);
   box-shadow: var(--shadow-md);
 }
 
@@ -63,17 +62,16 @@
 }
 
 .petlist_row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto minmax(120px, 0.75fr) minmax(380px, 1.6fr) auto;
   align-items: center;
-  gap: 1rem 1.15rem;
+  gap: 1rem 1.25rem;
   width: 100%;
   padding: 1.15rem;
   border: 1px solid var(--border);
   border-radius: 24px;
   background: var(--surface);
   box-shadow: var(--shadow-md);
-  width: 100%;
 }
 
 .petlist_row img {
@@ -81,9 +79,9 @@
 }
 
 .petlist_row span {
-  min-width: 120px;
+  min-width: 0;
   font-size: 1.05rem;
-  flex: 1 1 160px;
+  line-height: 1.2;
 }
 
 .actions {
@@ -143,21 +141,35 @@
 
 /* my adoptions */
 .contacts {
-  min-width: 180px;
-  padding: 0.9rem 1rem;
-  border-radius: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.5rem 1rem;
+  min-width: clamp(24rem, 34vw, 30rem);
+  padding: 1rem;
+  border-radius: 18px;
   background: rgba(77, 182, 172, 0.08);
   border: 1px solid rgba(77, 182, 172, 0.12);
 }
 
 .contacts p {
-  margin-bottom: 0.35rem;
+  margin: 0;
+  line-height: 1.35;
+  white-space: nowrap;
 }
 
 @media (max-width: 900px) {
+  .petlist_row {
+    grid-template-columns: auto 1fr;
+  }
+
+  .contacts {
+    grid-column: 1 / -1;
+  }
+
   .actions {
     width: 100%;
     margin-left: 0;
+    grid-column: 1 / -1;
     justify-content: flex-start;
   }
 }
@@ -177,11 +189,13 @@
   }
 
   .petlist_row span {
-    flex-basis: 100%;
+    grid-column: 2;
   }
 
   .contacts {
     width: 100%;
+    min-width: 0;
+    grid-template-columns: 1fr;
   }
 
   .actions a,

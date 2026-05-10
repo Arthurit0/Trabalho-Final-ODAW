@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import styles from "./Dashboard.module.css";
 
 import RoundedImage from "../../layout/RoundedImage";
+import confusedCat from "../../../assets/img/confused-cat.png";
 
 /* hooks */
 import useFlashMessage from "../../../hooks/useFlashMessage";
@@ -90,9 +91,9 @@ function MyPets() {
           pets.map((pet) => (
             <div key={pet._id} className={styles.petlist_row}>
               <RoundedImage
-                src={`${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`}
+                src={`${pet.images[0] ? `${process.env.REACT_APP_API}/images/pets/${pet.images[0]}` : confusedCat}`}
                 alt={pet.name}
-                width="px75"
+                width="size100px"
               />
               <span className="bold">{pet.name}</span>
               <div className={styles.actions}>

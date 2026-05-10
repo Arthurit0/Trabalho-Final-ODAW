@@ -9,14 +9,14 @@
   background: linear-gradient(135deg, rgba(77, 182, 172, 0.12), #ffffff);
 }
 
-.rounded_image.px75 {
-  width: 75px;
-  height: 75px;
+.rounded_image.size100px {
+  width: 100px;
+  height: 100px;
   border-width: 2px;
   box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
 }
 
-.rounded_image.px120 {
+.rounded_image.size120px {
   width: 120px;
   height: 120px;
   border-width: 3px;

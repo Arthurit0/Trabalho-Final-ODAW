@@ -1,4 +1,5 @@
 import api from "../../../utils/api";
+import confusedCat from "../../../assets/img/confused-cat.png";
 
 import { useState, useEffect } from "react";
 
@@ -35,9 +36,9 @@ function MyAdoptions() {
           pets.map((pet) => (
             <div key={pet._id} className={styles.petlist_row}>
               <RoundedImage
-                src={`${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`}
+                src={`${pet.images[0] ? `${process.env.REACT_APP_API}/images/pets/${pet.images[0]}` : confusedCat}`}
                 alt={pet.name}
-                width="px75"
+                width="size100px"
               />
               <span className="bold">{pet.name}</span>
               <div className={styles.contacts}>
@@ -47,8 +48,6 @@ function MyAdoptions() {
                 <p>
                   <span className="bold">Telefone:</span> {pet.user.phone}
                 </p>
-              </div>
-              <div className={styles.contacts}>
                 <p>
                   <span className="bold">Email:</span> {pet.user.email}
                 </p>

@@ -55,6 +55,17 @@
   box-shadow: 0 20px 34px rgba(37, 180, 86, 0.28);
 }
 
+.form_container input[type="file"] {
+  margin-bottom: -0.25rem;
+}
+
+.form_container sub {
+  display: block;
+  margin: -0.25em 0 1.25rem 0.5em;
+  font-size: 0.7rem;
+  color: var(--text);
+}
+
 .form_container p {
   margin-top: 1em;
   text-align: center;

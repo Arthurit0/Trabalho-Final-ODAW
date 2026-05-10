@@ -2,7 +2,7 @@
   position: fixed;
   top: 6.25rem;
   right: 1rem;
-  width: min(420px, calc(100% - 2rem));
+  width: min(500px, calc(100% - 2rem));
   padding: 1rem 1.1rem;
   border: 1px solid transparent;
   text-align: left;
@@ -11,6 +11,7 @@
   backdrop-filter: blur(12px);
   z-index: 30;
   animation: slide-in 0.25s ease;
+  font-size: 1.1em;
 }
 
 .success {

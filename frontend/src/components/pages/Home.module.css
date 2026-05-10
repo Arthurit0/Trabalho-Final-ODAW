@@ -1,3 +1,11 @@
+.home_section {
+  --home-page-width: min(60vw, calc(100vw - 2rem));
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--home-page-width);
+}
+
 .pet_home_header {
   display: flex;
   align-items: flex-end;
@@ -9,8 +17,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   background:
-    linear-gradient(135deg, rgba(77, 182, 172, 0.16), rgba(255, 255, 255, 0.9)),
-    var(--surface);
+    linear-gradient(135deg, rgba(77, 182, 172, 0.16), rgba(255, 255, 255, 0.9)), var(--surface);
   box-shadow: var(--shadow-md);
 }
 
@@ -18,16 +25,12 @@
   margin-bottom: 0.2em;
 }
 
-.pet_home_header p {
-  max-width: 42rem;
-}
-
 .pet_home_badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 3rem;
-  padding: 0.85rem 1.15rem;
+  padding: 1rem 1.2rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(34, 34, 34, 0.08);
@@ -38,7 +41,7 @@
 
 .pet_container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.4rem;
 }
 
@@ -72,20 +75,20 @@
 }
 
 .pet_card h3 {
-  margin-bottom: 0.45rem;
-  font-size: 1.45rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
 }
 
 .pet_card p {
   font-size: 0.95rem;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.2rem;
 }
 
 .pet_card a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
+  margin-top: 0.5rem;
   border-radius: 999px;
   color: var(--text);
   background: linear-gradient(135deg, var(--accent), #ffe483);
@@ -98,14 +101,13 @@
   font-size: 1rem;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 14px 26px rgba(255, 212, 0, 0.2);
   transition:
     transform 0.2s ease,
     filter 0.2s ease;
 }
 
 .pet_card a:hover {
-  filter: brightness(0.98);
+  filter: brightness(1.04);
   transform: translateY(-1px);
 }
 
@@ -144,6 +146,14 @@
 }
 
 @media (max-width: 640px) {
+  .home_section {
+    width: calc(100vw - 1.25rem);
+  }
+
+  .pet_container {
+    grid-template-columns: 1fr;
+  }
+
   .pet_home_header {
     padding: 1.2rem;
     border-radius: var(--radius-lg);
@@ -151,5 +161,11 @@
 
   .pet_home_badge {
     width: 100%;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 641px) {
+  .pet_container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

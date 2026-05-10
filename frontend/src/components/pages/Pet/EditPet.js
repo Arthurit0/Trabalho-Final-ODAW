@@ -70,9 +70,7 @@ function EditPet() {
         <h1>Editando o Pet: {pet.name}</h1>
         <p>Depois da edição os dados serão atualizados no sistema</p>
       </div>
-      {pet.name && (
-        <PetForm handleSubmit={updatePet} petData={pet} btnText="Editar" />
-      )}
+      {pet.name && <PetForm handleSubmit={updatePet} petData={pet} btnText="Editar" />}
     </section>
   );
 }

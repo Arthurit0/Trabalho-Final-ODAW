@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import dogSleep from "../../assets/img/dog-sleep.png";
+import confusedCat from "../../assets/img/confused-cat.png";
 
 import styles from "./Home.module.css";
 
 function Home() {
   const [pets, setPets] = useState([]);
+  const availablePets = pets.filter((pet) => pet.available);
 
   useEffect(() => {
     api.get("/pets").then((response) => {
@@ -17,7 +19,7 @@ function Home() {
   }, []);
 
   return (
-    <section>
+    <section className={styles.home_section}>
       <div className={styles.pet_home_header}>
         <div>
           <h1>Adote um Pet</h1>
@@ -27,8 +29,8 @@ function Home() {
           </p>
         </div>
         <div className={styles.pet_home_badge}>
-          {pets.length > 0
-            ? `${pets.length === 1 ? "1 pet" : `${pets.length} pets`} esperando por você!`
+          {availablePets.length > 0
+            ? `${availablePets.length === 1 ? "1 pet" : `${availablePets.length} pets`} esperando por você!`
             : "Novos pets em breve!"}
         </div>
       </div>
@@ -36,12 +38,21 @@ function Home() {
         {pets.length > 0 &&
           pets.map((pet) => (
             <div className={styles.pet_card} key={pet._id}>
-              <div
-                style={{
-                  backgroundImage: `url(${process.env.REACT_APP_API}/images/pets/${pet.images[0]})`,
-                }}
-                className={styles.pet_card_image}
-              ></div>
+              {pet.images[0] ? (
+                <div
+                  style={{
+                    backgroundImage: `url(${process.env.REACT_APP_API}/images/pets/${pet.images[0]})`,
+                  }}
+                  className={styles.pet_card_image}
+                ></div>
+              ) : (
+                <div
+                  style={{
+                    backgroundImage: `url(${confusedCat})`,
+                  }}
+                  className={styles.pet_card_image}
+                ></div>
+              )}
               <h3>{pet.name}</h3>
               <p>
                 <span className="bold">Espécie:</span> {pet.species}
